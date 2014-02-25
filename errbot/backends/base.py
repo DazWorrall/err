@@ -257,6 +257,10 @@ class Backend(object):
             response.setTo(get_jid_from_message(mess))
             response.setType('chat')
             response.setFrom(self.jid)
+        elif mess.getType() == 'groupchat':
+            response.setTo(mess.getFrom().getStripped().split('/')[0])
+            response.setType('groupchat')
+            response.setFrom(self.jid)
         else:
             response.setTo(mess.getFrom().getStripped())
             response.setType(mess.getType())
